@@ -1,0 +1,45 @@
+.NavItem {
+    display: flex;
+    justify-content: center;
+    height: 35px;
+    width: 100%;
+    padding: 0 15%;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    border-top: 2px solid transparent;
+    margin: 2px auto;
+    cursor: pointer;
+
+    &.active {
+        color: rgba(255, 255, 255, 1);
+        background: darken($dark, 5%);
+        border-left: 2px solid $primary
+    }
+
+    &:hover {
+        color: rgba(255, 255, 255, 1);
+        background: darken($dark, 5%)
+    }
+
+    & div {
+        width: 100%;
+        min-width: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    & p {
+        margin: 0 5px;
+        padding-left: 10px;
+        width: 80%;
+        text-align: start;
+        display: flex;
+        justify-content: flex-start;
+        font-family: "Source Sans Pro";
+        font-size: 12px;
+
+    }
+}

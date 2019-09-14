@@ -1,0 +1,48 @@
+.RegisterPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.RegisterForm {
+    padding: 22px 32px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    & p {
+        margin: 12px 0;
+    }
+
+    & button {
+        padding: 16px 18px;
+        background: $primary;
+        color: white;
+        margin: 15px 0;
+
+    }
+
+}
+
+.SocialSignInContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    & button {
+        width: 48%;
+    }
+}
+
+.RegisterIllustration {
+    width: 60%;
+    height: 100%;
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

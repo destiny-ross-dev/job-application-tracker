@@ -1,0 +1,6 @@
+const SettingsActionTypes = {
+  TRIGGER_USER_SETTINGS: "TRIGGER_USER_SETTINGS",
+  TRIGGER_MENU_EXPAND_COLLAPSE: "TRIGGER_MENU_EXPAND_COLLAPSE"
+};
+
+export default SettingsActionTypes;

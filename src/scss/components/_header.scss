@@ -1,0 +1,78 @@
+.Header {
+    width: calc(100vw - 160px);
+    height: 55px;
+    padding: 0 22px;
+    background: $dark;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    background: white;
+
+    &--minimized {
+        width: calc(100vw - 60px);
+    }
+}
+
+.LoginButton {
+    background: $primary;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-left: 2vw;
+}
+
+.SettingsContainer {
+    display: flex;
+    align-items: center;
+    color: lightgray;
+    width: 14vw;
+    justify-content: space-between;
+}
+
+.UserInfo {
+    display: flex;
+    align-items: center;
+    color: lightgray;
+    font-size: .8rem;
+    justify-content: space-between;
+    border-left: 1px solid lightgray;
+
+
+    & p {
+
+        margin: 0 12px;
+    }
+
+    &__Avatar {
+        display: flex;
+        background: $primary;
+        border-radius: 50px;
+        height: 25px;
+        width: 25px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: 800;
+        // margin-left: 12px;
+        border: 1px solid lightgray;
+    }
+}
+
+.UserSettings {
+    position: absolute;
+    right: 24px;
+    top: 50px;
+    background: white;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.AuthOptionsContainer {
+    display: flex;
+    align-items: center;
+}

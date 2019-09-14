@@ -1,0 +1,11 @@
+.PageContainer {
+    background: #F0F0F7;
+    width: calc(100vw - 160px);
+    height: calc(100vh - 55px);
+    padding: 22px 32px;
+    margin: 0 auto;
+
+    &--maximized {
+        width: calc(100vw - 60px)
+    }
+}
