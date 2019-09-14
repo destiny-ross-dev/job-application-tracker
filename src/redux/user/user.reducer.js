@@ -11,7 +11,7 @@ const initialState = {
   },
   error: null,
   isAuthenticated: true,
-  token: null
+  token: ""
 };
 
 const userReducer = (state = initialState, action) => {
@@ -41,7 +41,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: {},
-        isAuthenticated: false
+        isAuthenticated: false,
+        token: ""
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
-const merge = require("lodash.merge");
 const uuid = require("uuid/v4");
+const fs = require("fs");
 
 function jwtSignUser(user) {
   const ONE_WEEK = 60 * 60 * 24 * 7;
@@ -34,6 +34,12 @@ const register = async (req, res) => {
       hashpass
     );
     console.log(dbResponse);
+    fs.mkdir(`./public/${email}`, function(err) {
+      if (err) {
+        return console.error(err);
+      }
+      console.log("Directory created successfully!");
+    });
     const token = jwtSignUser(dbResponse[0]);
     res.cookie("user", {
       token,
