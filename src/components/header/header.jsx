@@ -28,11 +28,15 @@ const Header = ({
             onClick={() => triggerUserSettings(!userSettingsOpen)}
           >
             <p>{`${user.firstname} ${user.lastname}`}</p>
-            <i class="fas fa-chevron-down"></i>
+            <i className="fas fa-chevron-down"></i>
           </div>
           <div className="UserInfo__Avatar">
             {user.picture ? (
-              <img className="UserInfo__Avatar" src={user.picture} />
+              <img
+                className="UserInfo__Avatar"
+                src={user.picture}
+                alt="User avatar"
+              />
             ) : (
               "DR"
             )}

@@ -4,7 +4,6 @@ import InputField from "../../components/input-field/input-field";
 import { registerUser } from "../../redux/user/user.actions";
 
 const RegisterPage = ({ menuExpanded, registerUser, history }) => {
-  const [showPass, setShowPass] = useState(false);
   const [registerObj, setRegisterObj] = useState({
     firstname: "",
     lastname: "",
@@ -13,11 +12,6 @@ const RegisterPage = ({ menuExpanded, registerUser, history }) => {
   });
   const handleInput = e => {
     setRegisterObj({ ...registerObj, [e.target.name]: e.target.value });
-  };
-
-  const onLockClick = () => {
-    console.log("click");
-    setShowPass(!showPass);
   };
 
   const handleSubmit = async () => {
@@ -64,7 +58,7 @@ const RegisterPage = ({ menuExpanded, registerUser, history }) => {
           label="Email Address"
         />
         <InputField
-          type={showPass ? "text" : "password"}
+          type="password"
           name="password"
           value={registerObj.password}
           onChange={handleInput}
