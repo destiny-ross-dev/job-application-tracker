@@ -2,6 +2,7 @@ const express = require("express");
 const config = require("./config");
 const { globalMiddleware, connect } = require("./middleware");
 const authRouter = require("./api/auth/auth.router");
+const applicationsRouter = require("./api/applications/applications.router");
 
 // Initializes express server
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 globalMiddleware(app);
 
 app.use("/auth", authRouter);
+app.use("/applications", applicationsRouter);
 
 const start = async () => {
   console.log(config);

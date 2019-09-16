@@ -11,7 +11,7 @@ const NotAuthed = ({ setCurrentUser }) => {
   const handleInput = e => {
     setLoginObj({ ...loginObj, [e.target.name]: e.target.value });
   };
-  const onLoginClick = () => {
+  const onLoginClick = ({ menuExpanded }) => {
     let { email, password } = loginObj;
     setCurrentUser(email, password);
   };
@@ -38,7 +38,9 @@ const NotAuthed = ({ setCurrentUser }) => {
   );
 };
 const mapStateToProps = state => {
-  return state;
+  return {
+    state
+  };
 };
 
 const mapDispatchToProps = dispatch => ({

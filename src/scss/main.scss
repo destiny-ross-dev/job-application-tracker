@@ -1,13 +1,14 @@
 @import './reset';
 @import './variables';
 
-
 @import './components/app';
 @import './components/header';
 @import './components/navbar';
 @import './components/nav-item';
 @import './components/page_container';
 @import './components/input-field';
+@import './components/dashboard-stat';
 
 @import './pages/login-page';
 @import './pages/register-page';
+@import './pages/dashboard-page';

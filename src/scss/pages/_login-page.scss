@@ -1,9 +1,5 @@
 .LoginPage {
     display: flex;
+    flex-direction: column;
 
-    & div {
-        width: 45%;
-        margin: 0 2.5%;
-        border: 1px solid black;
-    }
 }
