@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { triggerUserSettings } from "../../redux/settings/settings.actions";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import InputField from "../input-field/input-field";
 const Header = ({
   menuExpanded,
   isAuthenticated,
@@ -17,7 +18,7 @@ const Header = ({
 
   return (
     <header className={menuExpanded ? "Header" : "Header Header--minimized"}>
-      <div>Search Component</div>
+      <div>{/* <InputField placeholder="Search" /> */}</div>
       {isAuthenticated ? (
         <div className="SettingsContainer">
           <div>

@@ -16,7 +16,7 @@ const NotAuthed = ({ setCurrentUser }) => {
     setCurrentUser(email, password);
   };
   return (
-    <div>
+    <div className="NotAuthed">
       <h1>No user. Login</h1>
       <div>Placeholder for landing page info.</div>
       <InputField

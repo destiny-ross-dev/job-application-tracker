@@ -1,10 +1,10 @@
 import React from "react";
 
-const DashboardStat = () => {
+const DashboardStat = ({ statName, value }) => {
   return (
     <div className="DashboardStat">
-      <p>Stat Description</p>
-      <h1>NUMBER</h1>
+      <p>{statName}</p>
+      <h1>{value}</h1>
     </div>
   );
 };

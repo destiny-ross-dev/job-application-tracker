@@ -14,7 +14,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getMostRecentApplications();
-  }, []);
+  }, [getMostRecentApplications]);
   return (
     <div
       className={`DashboardPage ${
@@ -27,13 +27,12 @@ const Dashboard = ({
         <NotAuthed />
       ) : (
         <div className="DashboardContainer">
-          <div className="StatContainer">
-            <DashboardStat />
-            <DashboardStat />
-            <DashboardStat />
-            <DashboardStat />
-          </div>
           <RecentApplicationList list={recentList} />
+          <div className="StatContainer">
+            <DashboardStat statName="Total Applications" value={56} />
+            <DashboardStat statName="Interviews Scheduled" value={4} />
+            <DashboardStat statName="Offers" value={1} />
+          </div>
           <div className="Chart">Chart</div>
         </div>
       )}
