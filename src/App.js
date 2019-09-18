@@ -8,8 +8,8 @@ import Router from "./routes";
 function App({ history, location }) {
   return (
     <div className="App">
-      <NavBar />
       <Header />
+      <NavBar />
       {Router}
     </div>
   );

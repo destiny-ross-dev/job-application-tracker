@@ -18,7 +18,11 @@ const Header = ({
 
   return (
     <header className={menuExpanded ? "Header" : "Header Header--minimized"}>
-      <div>{/* <InputField placeholder="Search" /> */}</div>
+      <div className="Header__Logo">
+        <Link to="/">
+          <h2>Track.it</h2>
+        </Link>
+      </div>
       {isAuthenticated ? (
         <div className="SettingsContainer">
           <div>
@@ -51,7 +55,16 @@ const Header = ({
           </button>
         </div>
       )}
-      {userSettingsOpen && <div className="UserSettings">{user.sub}</div>}
+      {userSettingsOpen && user && (
+        <div className="UserSettings">
+          <h2>
+            {user.firstname} {user.lastname}
+          </h2>
+          <Link to="/settings">Account Settings</Link>
+          <Link to="/profile">My Profile</Link>
+          <button>Log out</button>
+        </div>
+      )}
     </header>
   );
 };
