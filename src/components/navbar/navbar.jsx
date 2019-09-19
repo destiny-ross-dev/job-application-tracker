@@ -39,21 +39,25 @@ const NavBar = ({
       <div className="NavBar__NavItems">
         <NavItem text="Dashboard" path="/" fontAwesomeClassName="fas fa-home" />
         <NavItem
+          title="View applications"
           text="Applications"
           path="/applications"
           fontAwesomeClassName="fas fa-analytics"
         />
         <NavItem
+          title="View companies you've applied to or have interest in."
           text="Companies"
           path="/companies"
           fontAwesomeClassName="fas fa-building"
         />
         <NavItem
+          title="View contacts you've collected along your job search"
           text="Contacts"
           path="/contacts"
           fontAwesomeClassName="far fa-address-book"
         />
         <NavItem
+          title="View resumes, cover letters, and other job-search-related documents."
           text="Documents"
           path="/documents"
           fontAwesomeClassName="fas fa-file-alt"
@@ -61,12 +65,13 @@ const NavBar = ({
         <div className="Spacer"></div>
       </div>
       <NavItem
+        title="Go to Settings Page"
         text="Settings"
         path="/settings"
         fontAwesomeClassName="fas fa-cog"
       />
       {isEmpty(user) && (
-        <div className="NavItem" onClick={onLogin}>
+        <div title="Login your account" className="NavItem" onClick={onLogin}>
           <div>
             <i className="fas fa-sign-in"></i>
             {menuExpanded ? <p>Login</p> : null}
@@ -74,7 +79,11 @@ const NavBar = ({
         </div>
       )}
       {!isEmpty(user) && (
-        <div className="NavItem" onClick={onLogout}>
+        <div
+          title="Logout from your account"
+          className="NavItem"
+          onClick={onLogout}
+        >
           <div>
             <i className="fas fa-sign-out"></i>
             {menuExpanded ? <p>Logout</p> : null}
@@ -82,6 +91,7 @@ const NavBar = ({
         </div>
       )}
       <div
+        title="Toggle the navigation sidebar"
         onClick={triggerMenuExpandCollapse}
         className="ExpandTriggerContainer"
       >

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { isEmpty } from "../../utils";
 import NotAuthed from "./not-authed";
-import { getMostRecentApplications } from "../../redux/applications/applications.actions";
+import {
+  getMostRecentApplications,
+  getStatsForDashboard
+} from "../../redux/applications/applications.actions";
 import DashboardStat from "../../components/dashboard-stat/dashboard-stat";
 import RecentApplicationList from "./recent-application-list";
 import { ColumnChart } from "react-chartkick";
@@ -12,6 +15,8 @@ const Dashboard = ({
   menuExpanded,
   user,
   getMostRecentApplications,
+  getStatsForDashboard,
+  stats,
   history,
   recentList
 }) => {
@@ -19,6 +24,10 @@ const Dashboard = ({
   useEffect(() => {
     getMostRecentApplications();
   }, [getMostRecentApplications]);
+
+  useEffect(() => {
+    getStatsForDashboard();
+  }, [getStatsForDashboard]);
 
   useEffect(() => {
     mutateDataForChart(recentList);
@@ -40,7 +49,7 @@ const Dashboard = ({
     console.log(lineChartData);
     setLineChartData(lineChartData);
   };
-
+  console.log(stats);
   return (
     <div
       className={`DashboardPage ${
@@ -55,9 +64,15 @@ const Dashboard = ({
         <div className="DashboardContainer">
           <RecentApplicationList list={recentList} />
           <div className="StatContainer">
-            <DashboardStat statName="Total Applications" value={56} />
-            <DashboardStat statName="Interviews Scheduled" value={4} />
-            <DashboardStat statName="Offers" value={1} />
+            <DashboardStat
+              statName="Total Applications"
+              value={stats["Total Applications"]}
+            />
+            <DashboardStat
+              statName="Interviews Scheduled"
+              value={stats["Interviews Scheduled"]}
+            />
+            <DashboardStat statName="Offers" value={stats["Job Offers"]} />
           </div>
           <div className="Chart">
             <h2>Applications Over Time</h2>
@@ -80,12 +95,14 @@ const mapStateToProps = state => {
   return {
     user: state.user.currentUser,
     menuExpanded: state.settings.menuExpanded,
-    recentList: state.applications.recentApplications
+    recentList: state.applications.recentApplications,
+    stats: state.applications.stats
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getMostRecentApplications: () => dispatch(getMostRecentApplications())
+    getMostRecentApplications: () => dispatch(getMostRecentApplications()),
+    getStatsForDashboard: () => dispatch(getStatsForDashboard())
   };
 };
 export default connect(

@@ -2,7 +2,8 @@ import ApplicationsActionTypes from "./applications.types";
 
 const initialState = {
   applicationsList: [],
-  recentApplications: []
+  recentApplications: [],
+  stats: {}
 };
 
 const applicationsReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const applicationsReducer = (state = initialState, action) => {
       return {
         ...state,
         recentApplications: action.payload.mostRecent
+      };
+    case `${ApplicationsActionTypes.GET_STATS_FOR_DASH}_FULFILLED`:
+      return {
+        ...state,
+        stats: action.payload
       };
 
     default:

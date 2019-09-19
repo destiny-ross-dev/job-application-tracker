@@ -21,4 +21,24 @@ const getRecent = async (req, res) => {
   }
 };
 
-module.exports = { getRecent };
+const getStatsForDash = async (req, res) => {
+  const db = req.app.get("db");
+  const userid = await jwt.verify(
+    req.cookies.user.token,
+    config.secrets.jwt,
+    function(err, decoded) {
+      if (err) console.log(err);
+      return decoded.user_id;
+    }
+  );
+
+  try {
+    const stats = await db.applications.get_dashboard_stats(userid);
+    console.log(stats);
+    res.status(200).json(stats[0]);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports = { getRecent, getStatsForDash };

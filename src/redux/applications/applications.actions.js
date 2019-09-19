@@ -10,3 +10,13 @@ export const getMostRecentApplications = () => ({
     })
     .catch(err => console.log(err))
 });
+
+export const getStatsForDashboard = () => ({
+  type: ApplicationsActionTypes.GET_STATS_FOR_DASH,
+  payload: axios
+    .get("/applications/stats")
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => console.log(err))
+});

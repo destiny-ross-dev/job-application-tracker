@@ -2,9 +2,15 @@ import React from "react";
 import { NavLink as Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-const NavItem = ({ path, fontAwesomeClassName, menuExpanded, text }) => {
+const NavItem = ({ path, title, fontAwesomeClassName, menuExpanded, text }) => {
   return (
-    <Link className="NavItem" to={path} activeClassName="active" exact>
+    <Link
+      title={title}
+      className="NavItem"
+      to={path}
+      activeClassName="active"
+      exact
+    >
       <div>
         <i className={fontAwesomeClassName}></i>
         {menuExpanded ? <p>{text}</p> : null}
