@@ -18,11 +18,7 @@ const Header = ({
 
   return (
     <header className={menuExpanded ? "Header" : "Header Header--minimized"}>
-      <div className="Header__Logo">
-        <Link to="/">
-          <h2>Track.it</h2>
-        </Link>
-      </div>
+      <div className="Spacer"></div>
       {isAuthenticated ? (
         <div className="SettingsContainer">
           <div>

@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import RecentApplication from "./recent-application";
 
 const RecentApplicationsList = ({ list }) => {
   return (
     <div className="RecentApplicationsList">
       <h2>Recent Applications</h2>
       {list.map((e, i) => {
-        return (
-          <div className="RecentApplicationsList__Item" key={i}>
-            <h3>{e.company}</h3>
-            <p>{e.position_title}</p>
-            <p>{e.date_applied}</p>
-          </div>
-        );
+        return <RecentApplication app={e} i={i} key={e.id} />;
       })}
     </div>
   );

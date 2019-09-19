@@ -31,6 +31,11 @@ const NavBar = ({
   };
   return (
     <nav className={menuExpanded ? "NavBar" : "NavBar NavBar--minimized"}>
+      <div className="NavBar__Logo">
+        <Link to="/">
+          <h2>Track.it</h2>
+        </Link>
+      </div>
       <div className="NavBar__NavItems">
         <NavItem text="Dashboard" path="/" fontAwesomeClassName="fas fa-home" />
         <NavItem
