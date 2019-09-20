@@ -3,7 +3,8 @@ import ApplicationsActionTypes from "./applications.types";
 const initialState = {
   applicationsList: [],
   recentApplications: [],
-  stats: {}
+  stats: {},
+  tableList: []
 };
 
 const applicationsReducer = (state = initialState, action) => {
@@ -18,7 +19,11 @@ const applicationsReducer = (state = initialState, action) => {
         ...state,
         stats: action.payload
       };
-
+    case `${ApplicationsActionTypes.LOAD_TABLE}_FULFILLED`:
+      return {
+        ...state,
+        tableList: action.payload
+      };
     default:
       return state;
   }

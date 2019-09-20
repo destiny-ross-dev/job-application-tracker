@@ -20,3 +20,12 @@ export const getStatsForDashboard = () => ({
     })
     .catch(err => console.log(err))
 });
+
+export const getApplicationsForTable = (limit = 5, offset = 0) => ({
+  type: ApplicationsActionTypes.LOAD_TABLE,
+  payload: axios
+    .get(`/applications/table?limit=${limit}&offset=${offset}`)
+    .then(res => {
+      return res.data;
+    })
+});

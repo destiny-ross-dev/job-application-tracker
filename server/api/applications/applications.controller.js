@@ -40,5 +40,22 @@ const getStatsForDash = async (req, res) => {
     console.log(e);
   }
 };
+const getApplicationsForTable = async (req, res) => {
+  const db = req.app.get("db");
+  let { limit, offset } = req.query;
+  console.log("before null checks", limit, offset);
 
-module.exports = { getRecent, getStatsForDash };
+  !limit ? (limit = 10) : null;
+  !offset ? (offset = 0) : null;
+  try {
+    const response = await db.applications.get_applications_for_table(
+      limit,
+      offset
+    );
+    res.status(200).send(response);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports = { getRecent, getStatsForDash, getApplicationsForTable };
