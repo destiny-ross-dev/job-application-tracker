@@ -1,7 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { getApplicationsForTable } from "../../redux/applications/applications.actions";
-import Table from "../../components/applications-table/applications-table";
+// import Table from "../../components/applications-table/applications-table";
+import Spinner from "../../components/spinner/spinner";
+
+const Table = lazy(() =>
+  import("../../components/applications-table/applications-table")
+);
 const ApplicationsPage = ({
   menuExpanded,
   applications,
@@ -19,7 +24,9 @@ const ApplicationsPage = ({
       }`}
     >
       <h1>Applications</h1>
-      <Table data={applications} />
+      <Suspense fallback={<Spinner />}>
+        <Table data={applications} />
+      </Suspense>
     </div>
   );
 };

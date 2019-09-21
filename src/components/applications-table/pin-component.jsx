@@ -16,9 +16,14 @@ const PinComponent = ({ pinned, applicationId, reload, limit }) => {
     }
   };
 
+  console.log(pinned);
   return (
-    <div className="Table__Column Table__Column--Pinned" onClick={onPinClick}>
-      <i className={`fas fa-thumbtack pin ${pinned ? "solid" : "empty"}`} />
+    <div
+      className={`Table__Column Table__Column--Pinned ${
+        pinned ? "PinComponent--solid" : "PinComponent--empty"
+      }`}
+    >
+      <i className={`fas fa-thumbtack pin`} />
     </div>
   );
 };

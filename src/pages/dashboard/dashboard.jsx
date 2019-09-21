@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { connect } from "react-redux";
 import { isEmpty } from "../../utils";
 import NotAuthed from "./not-authed";
@@ -7,10 +7,13 @@ import {
   getStatsForDashboard
 } from "../../redux/applications/applications.actions";
 import DashboardStat from "../../components/dashboard-stat/dashboard-stat";
-import RecentApplicationList from "./recent-application-list";
 import { ColumnChart } from "react-chartkick";
 import "chart.js";
+import Spinner from "../../components/spinner/spinner";
 
+const RecentApplicationList = React.lazy(() =>
+  import("./recent-application-list")
+);
 const Dashboard = ({
   menuExpanded,
   user,
@@ -58,35 +61,39 @@ const Dashboard = ({
           : "PageContainer PageContainer--maximized"
       }`}
     >
-      {isEmpty(user) ? (
-        <NotAuthed />
-      ) : (
-        <div className="DashboardContainer">
-          <RecentApplicationList list={recentList} />
-          <div className="StatContainer">
-            <DashboardStat
-              statName="Total Applications"
-              value={stats["Total Applications"]}
-            />
-            <DashboardStat
-              statName="Interviews Scheduled"
-              value={stats["Interviews Scheduled"]}
-            />
-            <DashboardStat statName="Offers" value={stats["Job Offers"]} />
+      <Suspense fallback={<Spinner />}>
+        {isEmpty(user) ? (
+          <NotAuthed />
+        ) : (
+          <div className="DashboardContainer">
+            <RecentApplicationList list={recentList} />
+            {!isEmpty(stats) && (
+              <div className="StatContainer">
+                <DashboardStat
+                  statName="Total Applications"
+                  value={stats["Total Applications"]}
+                />
+                <DashboardStat
+                  statName="Interviews Scheduled"
+                  value={stats["Interviews Scheduled"]}
+                />
+                <DashboardStat statName="Offers" value={stats["Job Offers"]} />
+              </div>
+            )}
+            <div className="Chart">
+              <h2>Applications Over Time</h2>
+              <ColumnChart
+                label="Applications"
+                ytitle="Number of Applications"
+                xtitle="Date"
+                colors={["#8d2663"]}
+                data={lineChartData}
+                library={{ color: "#fff" }}
+              />
+            </div>
           </div>
-          <div className="Chart">
-            <h2>Applications Over Time</h2>
-            <ColumnChart
-              label="Applications"
-              ytitle="Number of Applications"
-              xtitle="Date"
-              colors={["#8d2663"]}
-              data={lineChartData}
-              library={{ color: "#fff" }}
-            />
-          </div>
-        </div>
-      )}
+        )}
+      </Suspense>
     </div>
   );
 };

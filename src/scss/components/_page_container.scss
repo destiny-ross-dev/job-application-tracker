@@ -9,4 +9,8 @@
     &--maximized {
         width: calc(100vw - 60px);
     }
+
+    & h1 {
+        color: white;
+    }
 }

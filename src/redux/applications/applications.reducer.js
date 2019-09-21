@@ -3,7 +3,11 @@ import ApplicationsActionTypes from "./applications.types";
 const initialState = {
   applicationsList: [],
   recentApplications: [],
-  stats: {},
+  stats: {
+    "Total Applications": 0,
+    "Interviews Scheduled": 0,
+    "Job Offers": 0
+  },
   tableList: []
 };
 

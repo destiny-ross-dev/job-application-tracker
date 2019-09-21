@@ -86,17 +86,13 @@ const Table = ({
           <h3 className="Table__ColumnTitle Table__Column Table__Column--Pinned">
             Pinned
           </h3>
+          <h3 className="Table__ColumnTitle Table__Column Table__Column--Options"></h3>
         </div>
 
         {applications.map((e, i) => {
           console.log(e);
           return (
-            <TableRow
-              key={i}
-              // reload={reloadTable}
-              limit={limit}
-              applicationData={e}
-            />
+            <TableRow key={i} reload={reloadTable} limit={limit} data={e} />
           );
         })}
         <div className="Table__Row Table__Row--Footer">
