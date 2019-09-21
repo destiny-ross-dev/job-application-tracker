@@ -17,23 +17,25 @@ const NotAuthed = ({ setCurrentUser }) => {
   };
   return (
     <div className="NotAuthed">
-      <h1>No user. Login</h1>
-      <div>Placeholder for landing page info.</div>
-      <InputField
-        type="text"
-        name="email"
-        value={loginObj.email}
-        onChange={handleInput}
-        label="Email Address"
-      />
-      <InputField
-        type="password"
-        name="password"
-        value={loginObj.password}
-        onChange={handleInput}
-        label="Password"
-      />
-      <button onClick={onLoginClick}>Login</button>
+      <div className="LoginContainer">
+        <h1>Login</h1>
+        <InputField
+          type="text"
+          name="email"
+          value={loginObj.email}
+          onChange={handleInput}
+          label="Email Address"
+        />
+        <InputField
+          type="password"
+          name="password"
+          value={loginObj.password}
+          onChange={handleInput}
+          label="Password"
+        />
+        <button onClick={onLoginClick}>Login</button>
+      </div>
+      <div className="SideStuff"></div>
     </div>
   );
 };

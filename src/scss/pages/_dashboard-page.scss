@@ -81,14 +81,38 @@
 }
 
 .NotAuthed {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+
     & button {
         width: 100%;
         padding: 16px 18px;
         background: $primary;
         color: white;
-        margin: 15px 0;
+        margin: 15px auto;
+    }
+
+    & .LoginContainer {
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+        height: 100%;
+        padding: 12px;
+
+        & input {
+            width: 100%;
+        }
+    }
+
+    & .SideStuff {
+        padding: 12px;
+        height: 100%;
+        width: 65%;
     }
 }
+
 
 .RecentApplicationOptionToggle {
     position: absolute;

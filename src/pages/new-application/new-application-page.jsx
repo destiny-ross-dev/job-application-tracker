@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormInput from "../../components/input-field/input-field";
 import axios from "axios";
 import { connect } from "react-redux";
@@ -19,21 +19,25 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
     contactPosition: "",
     note: ""
   });
-  const [date, setDate] = useState(today);
 
   const handleInput = e => {
     updateForm({ ...formState, [e.target.name]: e.target.value });
   };
+  const [autoSuggestList, setAutoSuggestList] = useState([]);
 
-  const onDateChange = e => {
-    console.log(e.target.value);
-    setDate(e.target.value);
-  };
+  useEffect(() => {
+    async function fetchData() {
+      const suggestionList = await axios.get(`/companies`);
+      setAutoSuggestList(suggestionList.data);
+    }
+
+    fetchData();
+  }, []);
 
   const [applicationDocs, setDocs] = useState({ resume: {}, coverLetter: {} });
 
   const onFileInputChange = e => {
-    console.log("res", e.target.name);
+    console.log("doc:", e.target.name);
     setDocs({ ...applicationDocs, [e.target.name]: e.target.files[0] });
   };
   const validateFormState = () => {
@@ -58,7 +62,6 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
       setError("Must supply all fields.");
       return;
     }
-
     setError("");
 
     const data = new FormData();
