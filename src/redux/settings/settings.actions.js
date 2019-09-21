@@ -8,3 +8,10 @@ export const triggerUserSettings = isOpen => ({
 export const triggerMenuExpandCollapse = () => ({
   type: SettingsActionTypes.TRIGGER_MENU_EXPAND_COLLAPSE
 });
+
+export const triggerAddObject = isOpen => {
+  return {
+    type: SettingsActionTypes.TRIGGER_ADD_OBJECT,
+    payload: isOpen
+  };
+};

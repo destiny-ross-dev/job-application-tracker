@@ -1,21 +1,27 @@
-import SettingsUserTypes from "./settings.types";
+import SettingsActionTypes from "./settings.types";
 
 const initialState = {
   menuExpanded: true,
-  userSettingsOpen: false
+  userSettingsOpen: false,
+  addObjectOpen: false
 };
 
 const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SettingsUserTypes.TRIGGER_USER_SETTINGS:
+    case SettingsActionTypes.TRIGGER_USER_SETTINGS:
       return {
         ...state,
         userSettingsOpen: action.payload
       };
-    case SettingsUserTypes.TRIGGER_MENU_EXPAND_COLLAPSE:
+    case SettingsActionTypes.TRIGGER_MENU_EXPAND_COLLAPSE:
       return {
         ...state,
         menuExpanded: !state.menuExpanded
+      };
+    case SettingsActionTypes.TRIGGER_ADD_OBJECT:
+      return {
+        ...state,
+        addObjectOpen: action.payload
       };
     // something
     default:

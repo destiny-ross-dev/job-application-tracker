@@ -1,10 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
-import { triggerUserSettings } from "../../redux/settings/settings.actions";
+import {
+  triggerUserSettings,
+  triggerAddObject
+} from "../../redux/settings/settings.actions";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import InputField from "../input-field/input-field";
 const Header = ({
+  addObjectOpen,
+  triggerAddObject,
   menuExpanded,
   isAuthenticated,
   user,
@@ -21,6 +26,9 @@ const Header = ({
       <div className="Spacer"></div>
       {isAuthenticated ? (
         <div className="SettingsContainer">
+          <div onClick={() => triggerAddObject(!addObjectOpen)}>
+            <i className="far fa-plus"></i>
+          </div>
           <div>
             <i className="fas fa-bell"></i>
           </div>
@@ -51,6 +59,12 @@ const Header = ({
           </button>
         </div>
       )}
+      {addObjectOpen && (
+        <div className="AddNav">
+          <Link to="/application/new">Add Application</Link>
+          <Link to="/company/new">Add Company</Link>
+        </div>
+      )}
       {userSettingsOpen && user && (
         <div className="UserSettings">
           <h2>
@@ -70,12 +84,14 @@ const mapStateToProps = state => {
     isAuthenticated: state.user.isAuthenticated,
     user: state.user.currentUser,
     menuExpanded: state.settings.menuExpanded,
-    userSettingsOpen: state.settings.userSettingsOpen
+    userSettingsOpen: state.settings.userSettingsOpen,
+    addObjectOpen: state.settings.addObjectOpen
   };
 };
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: () => dispatch(setCurrentUser()),
-  triggerUserSettings: isOpen => dispatch(triggerUserSettings(isOpen))
+  triggerUserSettings: isOpen => dispatch(triggerUserSettings(isOpen)),
+  triggerAddObject: isOpen => dispatch(triggerAddObject(isOpen))
 });
 export default connect(
   mapStateToProps,

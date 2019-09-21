@@ -1,0 +1,72 @@
+.NewApplicationPage {
+    flex-direction: column;
+}
+
+.ApplicationForm {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-height: 90vh;
+
+
+    &__Section {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        height: fit-content;
+
+        &--Company {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        &--Contact {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+        }
+
+        &Title {
+            margin-bottom: 10px;
+            width: 100%;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        &--Company {
+            width: 40%;
+        }
+
+        &--Job {
+            width: 40%;
+            flex-grow: 1;
+            // padding-top: 60px;
+            // margin-top: 50px;
+
+        }
+
+        &--Attachments {
+            width: 55%;
+            flex-grow: 1;
+        }
+
+        &--Contact {
+            width: 55%;
+        }
+    }
+}
+
+.error {
+    color: red;
+    font-size: 1.4rem;
+    margin: 20px auto;
+}
+
+.DocumentName {
+    color: white;
+    font-size: 1rem;
+}
