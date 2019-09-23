@@ -6,8 +6,10 @@
     margin: 0 auto;
     display: flex;
 
+
     &--maximized {
         width: calc(100vw - 60px);
+
     }
 
     & h1 {

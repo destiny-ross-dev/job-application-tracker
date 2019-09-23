@@ -1,0 +1,99 @@
+.FormStepper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
+    color: white;
+    justify-content: space-between;
+    margin: 20px auto;
+
+
+    &__Step {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: fit-content;
+
+        &-Number {
+            border-radius: 50px;
+            height: 25px;
+            width: 25px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin-right: 10px;
+
+            &--colored {
+                background: $primary;
+            }
+
+            &--grey {
+                background: lighten(grey, 20%);
+
+            }
+        }
+
+        &:after {
+            content: ’’;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+            top: 15px;
+            left: -50%;
+            z-index: -1;
+        }
+    }
+}
+
+.Form {
+    width: 70vw;
+    padding: 0 50px;
+    max-width: 80vw;
+    margin: 5vh auto;
+
+    height: fit-content;
+
+    &__Button {
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        background: $primary;
+        color: white;
+        border: none;
+
+        &--Next {
+            margin-left: auto;
+            align-self: flex-end;
+        }
+    }
+
+    &__ButtonContainer {
+        width: 800px;
+        margin: 40px auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__Section {
+        margin: 25px auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        // border: 1px solid white;
+        height: 250px;
+
+        &Title {
+            width: 100%;
+            align-self: flex-start;
+            margin: 10px 0;
+        }
+    }
+}
+
+.CityStateDiv {
+    // width: 100%;
+    display: flex;
+}

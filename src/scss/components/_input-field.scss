@@ -18,6 +18,7 @@
 
         &[name=company] {
             width: 380px;
+            // margin-right: 400px;
         }
 
         &[name=city] {
@@ -27,13 +28,6 @@
 
         &[name=state] {
             width: 80px;
-        }
-
-        &[name=contactName],
-        &[name=contactPosition],
-        &[name=contactEmail],
-        &[name=contactPhone] {
-            width: 22vw;
         }
 
         &:hover {
@@ -117,6 +111,7 @@
     & textarea {
         height: 100px;
         font-size: 1rem;
+        width: 100%;
     }
 }
 
@@ -154,6 +149,8 @@ textarea {
     color: white;
     font-size: 1.2em;
     border: 1px solid white;
+
+    width: 100%;
 
     &:focus {
         outline-color: $primary

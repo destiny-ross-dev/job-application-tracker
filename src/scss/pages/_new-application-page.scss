@@ -3,13 +3,14 @@
 }
 
 .ApplicationForm {
-    width: 100%;
+    width: 60%;
     margin: 15px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
     max-height: 90vh;
+    margin: 0 auto;
 
 
     &__Section {
