@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import FormInput from "../../components/input-field/input-field";
 import axios from "axios";
 import { connect } from "react-redux";
+import { submitNewApplication } from "../../redux/applications/applications.actions";
 import FormStepper from "../../components/form-stepper/form-stepper";
 const today = new Date().toISOString().substring(0, 10);
 
-const NewApplicationPage = ({ history, menuExpanded }) => {
+const NewApplicationPage = ({
+  history,
+  menuExpanded,
+  submitNewApplication
+}) => {
   const [formState, updateForm] = useState({
     company: "",
     address: "",
@@ -16,6 +21,7 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
     linkToPosting: "",
     city: "",
     state: "",
+    noContact: false,
     contactName: "",
     contactEmail: "",
     contactPhone: "",
@@ -24,7 +30,9 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
   });
 
   const handleInput = e => {
-    updateForm({ ...formState, [e.target.name]: e.target.value });
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    updateForm({ ...formState, [e.target.name]: value });
   };
   const [autoSuggestList, setAutoSuggestList] = useState([]);
 
@@ -43,29 +51,9 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
     console.log("doc:", e.target.name);
     setDocs({ ...applicationDocs, [e.target.name]: e.target.files[0] });
   };
-  const validateFormState = () => {
-    let isValid = true;
-    for (let property in formState) {
-      if (formState[property] === "") {
-        isValid = false;
-        return isValid;
-      }
-    }
-
-    return isValid;
-  };
-
-  const [error, setError] = useState("");
 
   const onSubmit = async e => {
     e.preventDefault();
-    let isValid = validateFormState();
-
-    if (isValid === false) {
-      setError("Must supply all fields.");
-      return;
-    }
-    setError("");
 
     const data = new FormData();
     let filesArr = [applicationDocs.resume, applicationDocs.coverLetter];
@@ -75,22 +63,23 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
       data.append("files", filesArr[i]);
     }
     // ADD THE OTHER INFORMATION
+    console.log(formState);
     data.append("applicationData", JSON.stringify(formState));
 
-    let response = await axios.post("/applications", data);
+    console.log(data);
+
+    let response = await axios.post("/applications/new", data);
     console.log(response.data);
 
-    history.push("/");
+    // history.push("/");
   };
 
   const [currentStep, setCurrentStep] = useState(1);
   const onNextStepClick = () => {
-    console.log(currentStep);
     if (currentStep > 3) return;
     setCurrentStep(currentStep + 1);
   };
   const onBackStepClick = () => {
-    console.log(currentStep);
     if (currentStep === 1) return;
     setCurrentStep(currentStep - 1);
   };
@@ -105,6 +94,7 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
     >
       <h1>Add New Application</h1>
       <FormStepper
+        onStepClick={setCurrentStep}
         steps={[
           { title: "Step 1", desc: "Company Information" },
           { title: "Step 2", desc: "Job Information" },
@@ -203,12 +193,14 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
           {currentStep === 3 && (
             <div className="Form__Section Form__Section--Contact">
               <h2 className="Form__SectionTitle">Contact Information</h2>
+
               <FormInput
                 type="text"
                 label="Contact Name"
                 name="contactName"
                 value={formState.contactName}
                 onChange={handleInput}
+                disabled={formState.noContact}
               />
               <FormInput
                 type="text"
@@ -216,6 +208,7 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
                 name="contactPosition"
                 value={formState.contactPosition}
                 onChange={handleInput}
+                disabled={formState.noContact}
               />
               <FormInput
                 type="email"
@@ -223,6 +216,7 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
                 name="contactEmail"
                 value={formState.contactEmail}
                 onChange={handleInput}
+                disabled={formState.noContact}
               />
               <FormInput
                 type="phone"
@@ -230,7 +224,18 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
                 name="contactPhone"
                 value={formState.contactPhone}
                 onChange={handleInput}
+                disabled={formState.noContact}
               />
+              <div className="CheckboxContainer">
+                <label>Applied without Internal Contact</label>
+                <input
+                  type="checkbox"
+                  checked={formState.noContact}
+                  onChange={handleInput}
+                  name="noContact"
+                />
+                <span class="checkmark"></span>
+              </div>
             </div>
           )}
           {currentStep === 4 && (
@@ -289,36 +294,15 @@ const NewApplicationPage = ({ history, menuExpanded }) => {
             </button>
           )}
           {currentStep === 4 && (
-            <button className="Form__Button Form__Button--Submit">
+            <button
+              className="Form__Button Form__Button--Submit"
+              onClick={onSubmit}
+            >
               Submit
             </button>
           )}
         </div>
       </FormStepper>
-
-      {/* <form className="ApplicationForm" onSubmit={onSubmit}>
-       
-
-        
-
-       
-
-       
-        <div className="ApplicationForm__Section ApplicationForm__Section--Notes">
-          <h2 className="ApplicationForm__SectionTitle">Notes</h2>
-          <textarea
-            rows="4"
-            className="FormInput"
-            name="note"
-            value={formState.note}
-            onChange={handleInput}
-          />
-        </div>
-        <h2 className="error">{error}</h2>
-        <button type="submit" className="SubmitButton">
-          <i className="fas fa-save" />
-        </button>
-      </form> */}
     </div>
   );
 };
@@ -327,7 +311,14 @@ const mapStateToProps = state => {
     menuExpanded: state.settings.menuExpanded
   };
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    submitNewApplication: data => dispatch(submitNewApplication({ data }))
+  };
+};
+
 export default connect(
   mapStateToProps,
-  {}
+  mapDispatchToProps
 )(NewApplicationPage);

@@ -14,6 +14,7 @@
         align-items: center;
         justify-content: space-evenly;
         height: fit-content;
+        cursor: pointer;
 
         &-Number {
             border-radius: 50px;
@@ -89,6 +90,15 @@
             width: 100%;
             align-self: flex-start;
             margin: 10px 0;
+        }
+
+        &--Contact .CheckboxContainer {
+            width: 100%;
+
+            & input {
+                margin-left: 16px;
+                background-color: red;
+            }
         }
     }
 }

@@ -29,3 +29,10 @@ export const getApplicationsForTable = (limit = 5, offset = 0) => ({
       return res.data;
     })
 });
+
+export const submitNewApplication = data => ({
+  type: ApplicationsActionTypes.SUBMIT_APPLICATION,
+  payload: axios.get("/applications/new", data).then(res => {
+    return res.data;
+  })
+});

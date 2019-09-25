@@ -1,6 +1,19 @@
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const config = require("../../config");
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "public/" + req.session.userid);
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage }).array("files");
 
 const getRecent = async (req, res) => {
   const db = req.app.get("db");
@@ -58,4 +71,49 @@ const getApplicationsForTable = async (req, res) => {
   }
 };
 
-module.exports = { getRecent, getStatsForDash, getApplicationsForTable };
+const createApplication = async (req, res) => {
+  const db = req.app.get("db");
+
+  upload(req, res, async function(err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
+
+    // No Upload err
+    const { applicationData } = req.body;
+    // const { files } = req.files;
+    console.log(applicationData);
+
+    const bd = JSON.parse(applicationData);
+    try {
+      let response = await db.applications.add_application(
+        bd.company,
+        bd.city,
+        bd.state,
+        bd.position,
+        bd.linkToPosting,
+        bd.datePosted,
+        bd.dateApplied,
+        bd.contactName,
+        bd.contactPosition,
+        bd.contactEmail,
+        bd.contactPhone,
+        req.files[0].originalname,
+        req.files[1].originalname
+      );
+
+      res.status(200).send(response);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+};
+
+module.exports = {
+  getRecent,
+  getStatsForDash,
+  getApplicationsForTable,
+  createApplication
+};

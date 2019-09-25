@@ -8,7 +8,8 @@ const initialState = {
     "Interviews Scheduled": 0,
     "Job Offers": 0
   },
-  tableList: []
+  tableList: [],
+  newApplicationData: {}
 };
 
 const applicationsReducer = (state = initialState, action) => {
@@ -27,6 +28,10 @@ const applicationsReducer = (state = initialState, action) => {
       return {
         ...state,
         tableList: action.payload
+      };
+    case `${ApplicationsActionTypes.SUBMIT_APPLICATION}_FULFILLED`:
+      return {
+        ...state
       };
     default:
       return state;

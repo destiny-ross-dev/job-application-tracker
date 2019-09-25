@@ -1,8 +1,13 @@
 import React from "react";
 
-const InputField = ({ handleChange, label, onLockClick, ...props }) => {
+const InputField = ({ error, handleChange, label, onLockClick, ...props }) => {
   return (
-    <div className="InputField" type={props.type}>
+    <div
+      className={`${
+        props.disabled ? "InputField InputField--disabled" : "InputField"
+      }`}
+      type={props.type}
+    >
       <input onChange={handleChange} {...props} />
       {label ? (
         <label className={props.value.length ? "shrink" : ""}>{label}</label>
