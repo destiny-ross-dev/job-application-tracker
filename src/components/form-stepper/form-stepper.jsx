@@ -5,7 +5,11 @@ const FormStepper = ({ steps, currentStep, children, onStepClick }) => {
     <div className="FormStepper">
       {steps.map((e, i) => {
         return (
-          <div className="FormStepper__Step" onClick={() => onStepClick(i + 1)}>
+          <div
+            key={`Step-${i + 1}`}
+            className="FormStepper__Step"
+            onClick={() => onStepClick(i + 1)}
+          >
             <p
               className={`FormStepper__Step-Number FormStepper__Step-Number${
                 currentStep >= i + 1 ? "--colored" : "--grey"

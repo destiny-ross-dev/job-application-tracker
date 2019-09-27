@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FormInput from "../../components/input-field/input-field";
 import axios from "axios";
 import { connect } from "react-redux";
+import { isEmpty } from "../../utils";
 import { submitNewApplication } from "../../redux/applications/applications.actions";
 import FormStepper from "../../components/form-stepper/form-stepper";
 const today = new Date().toISOString().substring(0, 10);
@@ -76,6 +77,7 @@ const NewApplicationPage = ({
 
   const [currentStep, setCurrentStep] = useState(1);
   const onNextStepClick = () => {
+    if (!validateFields(currentStep)) return;
     if (currentStep > 3) return;
     setCurrentStep(currentStep + 1);
   };
@@ -84,6 +86,39 @@ const NewApplicationPage = ({
     setCurrentStep(currentStep - 1);
   };
 
+  const [error, setError] = useState("");
+  const validateFields = step => {
+    let isValid = true;
+    console.log(formState);
+    switch (step) {
+      case 1:
+        isEmpty(formState.company) && (isValid = false);
+        isEmpty(formState.city) && (isValid = false);
+        isEmpty(formState.state) && (isValid = false);
+        isEmpty(formState.industry) && (isValid = false);
+        break;
+      case 2:
+        isEmpty(formState.position) && (isValid = false);
+        isEmpty(formState.linkToPosting) && (isValid = false);
+        isEmpty(formState.dateApplied) && (isValid = false);
+        break;
+      case 3:
+        if (formState.noContact === true) {
+          break;
+        } else {
+          isEmpty(formState.contactName) && (isValid = false);
+          isEmpty(formState.contactPosition) && (isValid = false);
+          isEmpty(formState.contactPhone) && (isValid = false);
+          isEmpty(formState.contactEmail) && (isValid = false);
+          break;
+        }
+    }
+
+    if (isValid === false) {
+      setError("All fields must be provided");
+    } else setError("");
+    return isValid;
+  };
   return (
     <div
       className={`NewApplicationPage ${
@@ -277,14 +312,17 @@ const NewApplicationPage = ({
           )}
         </div>
         <div className="Form__ButtonContainer">
-          {currentStep > 1 && (
-            <button
-              className="Form__Button Form__Button--Back"
-              onClick={onBackStepClick}
-            >
-              Back
-            </button>
-          )}
+          <div>
+            {currentStep > 1 && (
+              <button
+                className="Form__Button Form__Button--Back"
+                onClick={onBackStepClick}
+              >
+                Back
+              </button>
+            )}
+          </div>
+          <h2 className="error">{error}</h2>
           {currentStep < 4 && (
             <button
               className="Form__Button Form__Button--Next"

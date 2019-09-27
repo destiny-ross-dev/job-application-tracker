@@ -33,7 +33,7 @@ const NavBar = ({
     <nav className={menuExpanded ? "NavBar" : "NavBar NavBar--minimized"}>
       <div className="NavBar__Logo">
         <Link to="/">
-          <h2>Track.it</h2>
+          <h2>Apply</h2>
         </Link>
       </div>
       <div className="NavBar__NavItems">
